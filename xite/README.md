@@ -50,4 +50,105 @@ A core innovation of this project is a custom bridging compiler that:
     - API service interfaces
     - Validation schemas
 
-Tujuan utamanya adalah mempercepat migrasi ERP lama yang masih berbasis PHP ke aplikasi modern tanpa harus menulis ulang dari nol.
+This dramatically speeds up the migration of legacy PHP ERP codebases into modern applications.
+
+# 🏗️ Project Structure
+```
+/src
+  /frontend
+    /react-app
+      /components
+      /pages
+      /hooks
+      /services
+  /backend
+    /compiler
+      parser.php
+      translator.js
+      mapping-rules.json
+  /tauri
+    src-tauri/
+      main.rs
+      tauri.conf.json
+
+/config
+  module-schema/
+  compiler-rules/
+
+/docs
+  architecture.md
+  compiler-spec.md
+```
+
+# ⚙️ How the Bridging Compiler Works
+1. PHP Source Input
+The compiler reads PHP modules from the source directory.
+
+2. PHP AST Parsing
+The parser extracts:
+- Classes
+- Field definitions
+- Functions
+- Validation rules
+- Metadata
+
+3. Rule-Based Mapping
+The compiler matches PHP structures with predefined mapping rules in mapping-rules.json.
+
+4. React Code Output
+The compiler generates:
+- React components (*.jsx or *.tsx)
+- Hooks for state and API interaction
+- Table or form configuration objects
+- API service files
+
+5. Integration into the React App
+The output is automatically placed into the appropriate frontend folder.
+
+
+# 🛠️ Getting Started
+1. Install Dependencies
+**React Frontend**
+```
+cd src/frontend/react-app
+npm install
+```
+
+**Tauri CLI**
+```
+cargo install tauri-cli
+```
+
+**PHP for Compiler**
+Ensure PHP is available:
+```
+php -v
+```
+
+2. Generate React Code from PHP Sources
+```
+php src/backend/compiler/parser.php --input=modules --output=src/frontend/react-app/generated
+```
+
+3. Start the React Development Server
+```
+npm run dev
+```
+
+4. Build the Tauri Desktop Application
+```
+cd src/tauri
+npm run tauri build
+```
+
+# 🤝 Contributing
+
+Contributions are welcome! You may help by:
+- Adding or improving ERP modules
+- Enhancing the bridging compiler
+- Improving UI/UX
+- Extending documentation
+Feel free to open issues or pull requests.
+
+# 📜 License
+This project is released under the MIT License — free to use, modify, and distribute.
