@@ -1,16 +1,35 @@
-# React + Vite
+# Xite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ERP Management System – Tauri + React + PHP-to-React Bridging Compiler
 
-Currently, two official plugins are available:
+Selamat datang di proyek ERP Management System yang dibangun dengan arsitektur modern dan performa tinggi. Proyek ini memanfaatkan Tauri sebagai platform desktop-native, React sebagai antarmuka frontend, serta sebuah bridging compiler yang berfungsi menerjemahkan logika atau konfigurasi dari PHP source code ke React-compatible source code.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+# 🚀 Fitur Utama
+1. Desktop App Berbasis Tauri
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Performa cepat (lebih ringan dari Electron)
+Ukuran build kecil
+Native API access (filesystem, OS integration)
+Aman dan mudah di-deploy
 
-## Expanding the ESLint configuration
+2. Frontend Modern Menggunakan React
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+UI deklaratif dan modular
+State management fleksibel (Redux / Zustand / Recoil — dapat diganti sesuai kebutuhan)
+Komponen-komponen dapat diperluas untuk modul ERP lainnya
+
+3. Bridging Compiler: PHP → React Source Translator
+
+- Salah satu komponen utama dari proyek ini adalah bridging compiler internal yang berfungsi:
+- Membaca struktur atau definisi modul ERP dari file PHP (misalnya model, controller, schema, rules)
+- Menganalisis kode (AST parsing)
+- Menerjemahkan struktur tersebut menjadi:
+
+    - React component
+    - Hook logic
+    - API interface
+    - Validation schema
+    - Dynamic form / table configuration
+
+Tujuan utamanya adalah mempercepat migrasi ERP lama yang masih berbasis PHP ke aplikasi modern tanpa harus menulis ulang dari nol.
