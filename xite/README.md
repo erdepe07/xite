@@ -2,34 +2,52 @@
 
 ERP Management System – Tauri + React + PHP-to-React Bridging Compiler
 
-Selamat datang di proyek ERP Management System yang dibangun dengan arsitektur modern dan performa tinggi. Proyek ini memanfaatkan Tauri sebagai platform desktop-native, React sebagai antarmuka frontend, serta sebuah bridging compiler yang berfungsi menerjemahkan logika atau konfigurasi dari PHP source code ke React-compatible source code.
+Welcome to the ERP Management System project — a modern, lightweight, and modular ERP platform built with Tauri for the desktop layer, React for the frontend, and a custom bridging compiler that translates PHP source code into React-compatible source code.
 
+This project is designed to modernize legacy ERP systems while maintaining high performance and clean architecture.
 
-# 🚀 Fitur Utama
-1. Desktop App Berbasis Tauri
+# 📌 Project Overview
+This ERP system aims to provide a scalable, modular, and developer-friendly platform using the following technologies:
+- Tauri → Bundles the ERP into a fast, secure, and small-footprint desktop application.
+- React → Delivers a responsive, modular, and modern UI.
+- Bridging Compiler (PHP → React) → Automatically translates legacy PHP modules into React components, hooks, schemas, or services.
 
-Performa cepat (lebih ringan dari Electron)
-Ukuran build kecil
-Native API access (filesystem, OS integration)
-Aman dan mudah di-deploy
+The system can be extended to support typical ERP functionalities such as:
+- Finance & accounting
+- Inventory management
+- Procurement
+- Sales & invoicing
+- HR / personnel
+- Custom workflows
 
-2. Frontend Modern Menggunakan React
+# 🚀 Key Features
+1. Desktop Application Powered by Tauri
+- Very small build size
+- High performance (lighter than Electron)
+- Access to native OS APIs (file system, window control, etc.)
+- Secure and easy to deploy across Windows, Linux, and macOS
 
-UI deklaratif dan modular
-State management fleksibel (Redux / Zustand / Recoil — dapat diganti sesuai kebutuhan)
-Komponen-komponen dapat diperluas untuk modul ERP lainnya
+2. Modern React Frontend
+- Declarative UI components
+- Flexible state management (Redux, Zustand, Recoil — optional)
+- Fully modular component architecture
 
-3. Bridging Compiler: PHP → React Source Translator
+3. PHP → React Bridging Compiler
 
-- Salah satu komponen utama dari proyek ini adalah bridging compiler internal yang berfungsi:
-- Membaca struktur atau definisi modul ERP dari file PHP (misalnya model, controller, schema, rules)
-- Menganalisis kode (AST parsing)
-- Menerjemahkan struktur tersebut menjadi:
+A core innovation of this project is a custom bridging compiler that:
+- Reads and analyses PHP source modules
+- Parses PHP AST (Abstract Syntax Tree)
+- Extracts metadata such as:
+    - Module name
+    - Fields / schema
+    - Validation rules
+    - Simple business logic
 
-    - React component
-    - Hook logic
-    - API interface
-    - Validation schema
-    - Dynamic form / table configuration
+- Maps the extracted structure into React-friendly output:
+    - React components (JSX/TSX)
+    - React hooks
+    - Form/table configurations
+    - API service interfaces
+    - Validation schemas
 
 Tujuan utamanya adalah mempercepat migrasi ERP lama yang masih berbasis PHP ke aplikasi modern tanpa harus menulis ulang dari nol.
