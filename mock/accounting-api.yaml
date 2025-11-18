@@ -1,0 +1,719 @@
+openapi: 3.1.0
+info:
+  title: Multitenant Accounting API
+  version: 1.0.0
+  description: >
+    A REST API for a multitenant accounting system supporting chart of
+    accounts, journal entries, invoicing, billing, receivables, payables,
+    and payments. Follows OpenAPI 3.1 specification.
+
+servers:
+  - url: https://api.kotakcantik.com/v1/accounting
+
+tags:
+  - name: Tenants
+  - name: Accounts
+  - name: Journal Entries
+  - name: Customers
+  - name: Vendors
+  - name: Invoices
+  - name: Bills
+  - name: Payments
+  - name: Webhooks
+
+security:
+  - BearerAuth: []
+  - TenantHeader: []
+
+paths:
+
+  ##############################################################
+  # TENANT INFO
+  ##############################################################
+  /tenants/me:
+    get:
+      tags: [Tenants]
+      summary: Get current tenant information
+      responses:
+        "200":
+          description: Tenant info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tenant"
+
+  ##############################################################
+  # CHART OF ACCOUNTS
+  ##############################################################
+  /accounts:
+    get:
+      tags: [Accounts]
+      summary: List accounts
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/Limit"
+      responses:
+        "200":
+          description: List of accounts
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedAccounts"
+
+    post:
+      tags: [Accounts]
+      summary: Create an account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountCreate"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Account"
+
+  /accounts/{id}:
+    get:
+      tags: [Accounts]
+      summary: Retrieve an account
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Account"
+
+    patch:
+      tags: [Accounts]
+      summary: Update an account
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountUpdate"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Account"
+
+    delete:
+      tags: [Accounts]
+      summary: Archive an account
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "204":
+          description: Deleted
+
+  ##############################################################
+  # JOURNAL ENTRIES
+  ##############################################################
+  /journal-entries:
+    get:
+      tags: [Journal Entries]
+      summary: List journal entries
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/Limit"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedJournalEntries"
+
+    post:
+      tags: [Journal Entries]
+      summary: Create a journal entry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JournalEntryCreate"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JournalEntry"
+
+  /journal-entries/{id}:
+    get:
+      tags: [Journal Entries]
+      summary: Retrieve a journal entry
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JournalEntry"
+
+    post:
+      tags: [Journal Entries]
+      summary: Post (finalize) a journal entry
+      operationId: postJournalEntry
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "200":
+          description: Posted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JournalEntry"
+
+  ##############################################################
+  # CUSTOMERS
+  ##############################################################
+  /customers:
+    get:
+      tags: [Customers]
+      summary: List customers
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/Limit"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedCustomers"
+
+    post:
+      tags: [Customers]
+      summary: Create customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomerCreate"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+
+  /customers/{id}:
+    get:
+      tags: [Customers]
+      summary: Retrieve customer
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+
+
+  ##############################################################
+  # VENDORS
+  ##############################################################
+  /vendors:
+    get:
+      tags: [Vendors]
+      summary: List vendors
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedVendors"
+
+    post:
+      tags: [Vendors]
+      summary: Create vendor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VendorCreate"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Vendor"
+
+
+  ##############################################################
+  # INVOICES
+  ##############################################################
+  /invoices:
+    get:
+      tags: [Invoices]
+      summary: List invoices
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedInvoices"
+
+    post:
+      tags: [Invoices]
+      summary: Create an invoice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvoiceCreate"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Invoice"
+
+  /invoices/{id}:
+    get:
+      tags: [Invoices]
+      summary: Retrieve an invoice
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Invoice"
+
+    post:
+      tags: [Invoices]
+      summary: Send an invoice
+      operationId: sendInvoice
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "200":
+          description: Sent
+
+
+  ##############################################################
+  # BILLS
+  ##############################################################
+  /bills:
+    get:
+      tags: [Bills]
+      summary: List bills
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedBills"
+
+    post:
+      tags: [Bills]
+      summary: Create bill
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BillCreate"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Bill"
+
+  ##############################################################
+  # PAYMENTS
+  ##############################################################
+  /payments/received:
+    post:
+      tags: [Payments]
+      summary: Record customer payment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaymentReceivedCreate"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentReceived"
+
+  /payments/made:
+    post:
+      tags: [Payments]
+      summary: Record vendor payment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaymentMadeCreate"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentMade"
+
+
+components:
+
+  ##############################################################
+  # SECURITY
+  ##############################################################
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+    TenantHeader:
+      type: apiKey
+      in: header
+      name: X-Tenant-ID
+
+  ##############################################################
+  # PARAMETERS
+  ##############################################################
+  parameters:
+    ID:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+
+    Limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+
+
+  ##############################################################
+  # SCHEMAS
+  ##############################################################
+  schemas:
+
+    #########################
+    # TENANT
+    #########################
+    Tenant:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        status: { type: string }
+        createdAt: { type: string, format: date-time }
+
+    #########################
+    # ACCOUNTING CORE
+    #########################
+    Account:
+      type: object
+      required: [id, code, name, type]
+      properties:
+        id: { type: string }
+        code: { type: string }
+        name: { type: string }
+        type:
+          type: string
+          enum: [asset, liability, equity, income, expense]
+        parentAccountId:
+          type: string
+          nullable: true
+        isActive:
+          type: boolean
+          default: true
+
+    AccountCreate:
+      type: object
+      required: [code, name, type]
+      properties:
+        code: { type: string }
+        name: { type: string }
+        type: { $ref: "#/components/schemas/Account/properties/type" }
+        parentAccountId: { type: string, nullable: true }
+
+    AccountUpdate:
+      type: object
+      properties:
+        name: { type: string }
+        isActive: { type: boolean }
+
+    PaginatedAccounts:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Account"
+        total:
+          type: integer
+
+
+    #########################
+    # JOURNAL ENTRIES
+    #########################
+    JournalEntryLine:
+      type: object
+      required: [accountId]
+      properties:
+        accountId: { type: string }
+        debit: { type: number, default: 0 }
+        credit: { type: number, default: 0 }
+        memo: { type: string, nullable: true }
+
+    JournalEntry:
+      type: object
+      required: [id, date, lines]
+      properties:
+        id: { type: string }
+        date: { type: string, format: date }
+        referenceNumber: { type: string }
+        description: { type: string }
+        posted: { type: boolean }
+        lines:
+          type: array
+          items:
+            $ref: "#/components/schemas/JournalEntryLine"
+
+    JournalEntryCreate:
+      type: object
+      required: [date, lines]
+      properties:
+        date: { type: string, format: date }
+        referenceNumber: { type: string }
+        description: { type: string }
+        lines:
+          type: array
+          items:
+            $ref: "#/components/schemas/JournalEntryLine"
+
+
+    PaginatedJournalEntries:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/JournalEntry"
+        total:
+          type: integer
+
+
+
+    #########################
+    # CUSTOMERS
+    #########################
+    Customer:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        email: { type: string }
+        billingAddress: { type: object }
+
+    CustomerCreate:
+      type: object
+      required: [name]
+      properties:
+        name: { type: string }
+        email: { type: string }
+        billingAddress: { type: object }
+
+    PaginatedCustomers:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Customer"
+        total: { type: integer }
+
+
+    #########################
+    # VENDORS
+    #########################
+    Vendor:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        email: { type: string }
+
+    VendorCreate:
+      type: object
+      required: [name]
+      properties:
+        name: { type: string }
+        email: { type: string }
+
+    PaginatedVendors:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Vendor"
+        total: { type: integer }
+
+
+    #########################
+    # INVOICES
+    #########################
+    InvoiceItem:
+      type: object
+      properties:
+        description: { type: string }
+        quantity: { type: number }
+        unitPrice: { type: number }
+        accountId: { type: string }
+
+    Invoice:
+      type: object
+      properties:
+        id: { type: string }
+        customerId: { type: string }
+        invoiceNumber: { type: string }
+        invoiceDate: { type: string, format: date }
+        dueDate: { type: string, format: date }
+        totalAmount: { type: number }
+        balanceDue: { type: number }
+        status:
+          type: string
+          enum: [draft, sent, paid, void]
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/InvoiceItem"
+
+    InvoiceCreate:
+      type: object
+      required: [customerId, items]
+      properties:
+        customerId: { type: string }
+        invoiceDate: { type: string, format: date }
+        dueDate: { type: string, format: date }
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/InvoiceItem"
+
+    PaginatedInvoices:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Invoice"
+        total: { type: integer }
+
+
+    #########################
+    # BILLS
+    #########################
+    BillItem:
+      type: object
+      properties:
+        description: { type: string }
+        quantity: { type: number }
+        unitPrice: { type: number }
+        accountId: { type: string }
+
+    Bill:
+      type: object
+      properties:
+        id: { type: string }
+        vendorId: { type: string }
+        billDate: { type: string, format: date }
+        dueDate: { type: string, format: date }
+        totalAmount: { type: number }
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/BillItem"
+
+    BillCreate:
+      type: object
+      required: [vendorId, items]
+      properties:
+        vendorId: { type: string }
+        billDate: { type: string, format: date }
+        dueDate: { type: string, format: date }
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/BillItem"
+
+    PaginatedBills:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Bill"
+        total: { type: integer }
+
+
+    #########################
+    # PAYMENTS
+    #########################
+    PaymentReceived:
+      type: object
+      properties:
+        id: { type: string }
+        customerId: { type: string }
+        amount: { type: number }
+        paymentDate: { type: string, format: date }
+
+    PaymentReceivedCreate:
+      type: object
+      required: [customerId, amount]
+      properties:
+        customerId: { type: string }
+        amount: { type: number }
+        paymentDate: { type: string, format: date }
+
+    PaymentMade:
+      type: object
+      properties:
+        id: { type: string }
+        vendorId: { type: string }
+        amount: { type: number }
+        paymentDate: { type: string, format: date }
+
+    PaymentMadeCreate:
+      type: object
+      required: [vendorId, amount]
+      properties:
+        vendorId: { type: string }
+        amount: { type: number }
+        paymentDate: { type: string, format: date }

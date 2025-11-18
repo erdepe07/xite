@@ -1,0 +1,425 @@
+openapi: 3.1.0
+info:
+  title: Small Banking System API
+  version: 1.0.0
+  description: >
+    A lightweight core banking API supporting customers, accounts, cards,
+    deposits, withdrawals, transfers, and transaction history.
+
+servers:
+  - url: https://api.smallbank.com/v1
+
+tags:
+  - name: Customers
+  - name: Accounts
+  - name: Transactions
+  - name: Transfers
+  - name: Cards
+  - name: Webhooks
+
+security:
+  - BearerAuth: []
+
+paths:
+
+  ############################################################
+  # CUSTOMERS
+  ############################################################
+  /customers:
+    get:
+      tags: [Customers]
+      summary: List customers
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedCustomers"
+
+    post:
+      tags: [Customers]
+      summary: Create a customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomerCreate"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+
+  /customers/{id}:
+    get:
+      tags: [Customers]
+      summary: Get customer
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+
+    patch:
+      tags: [Customers]
+      summary: Update customer
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomerUpdate"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+
+
+  ############################################################
+  # ACCOUNTS
+  ############################################################
+  /accounts:
+    get:
+      tags: [Accounts]
+      summary: List accounts
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedAccounts"
+
+    post:
+      tags: [Accounts]
+      summary: Open a new bank account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountCreate"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Account"
+
+  /accounts/{id}:
+    get:
+      tags: [Accounts]
+      summary: Retrieve account details
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Account"
+
+
+  ############################################################
+  # TRANSACTIONS
+  ############################################################
+  /accounts/{id}/transactions:
+    get:
+      tags: [Transactions]
+      summary: Get account transactions
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedTransactions"
+
+
+  ############################################################
+  # TRANSFERS
+  ############################################################
+  /transfers:
+    post:
+      tags: [Transfers]
+      summary: Create a transfer between accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TransferCreate"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transfer"
+
+  /transfers/{id}:
+    get:
+      tags: [Transfers]
+      summary: Get transfer status
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transfer"
+
+
+  ############################################################
+  # CARDS
+  ############################################################
+  /cards:
+    post:
+      tags: [Cards]
+      summary: Issue a debit card
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CardCreate"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Card"
+
+  /cards/{id}:
+    get:
+      tags: [Cards]
+      summary: Retrieve card details
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Card"
+
+    patch:
+      tags: [Cards]
+      summary: Update card status (block, freeze)
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CardUpdate"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Card"
+
+
+components:
+
+  ############################################################
+  # SECURITY
+  ############################################################
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  ############################################################
+  # PARAMETERS
+  ############################################################
+  parameters:
+    ID:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+
+
+  ############################################################
+  # SCHEMAS
+  ############################################################
+  schemas:
+
+    #######################
+    # CUSTOMER
+    #######################
+    Customer:
+      type: object
+      properties:
+        id: { type: string }
+        fullName: { type: string }
+        email: { type: string }
+        phone: { type: string }
+        kycStatus:
+          type: string
+          enum: [pending, verified, rejected]
+        createdAt:
+          type: string
+          format: date-time
+
+    CustomerCreate:
+      type: object
+      required: [fullName, email]
+      properties:
+        fullName: { type: string }
+        email: { type: string }
+        phone: { type: string }
+
+    CustomerUpdate:
+      type: object
+      properties:
+        fullName: { type: string }
+        phone: { type: string }
+
+    PaginatedCustomers:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Customer"
+        total:
+          type: integer
+
+
+    #######################
+    # ACCOUNTS
+    #######################
+    Account:
+      type: object
+      properties:
+        id: { type: string }
+        customerId: { type: string }
+        type:
+          type: string
+          enum: [checking, savings]
+        balance:
+          type: number
+        currency:
+          type: string
+          default: USD
+        status:
+          type: string
+          enum: [active, frozen, closed]
+        createdAt:
+          type: string
+          format: date-time
+
+    AccountCreate:
+      type: object
+      required: [customerId, type]
+      properties:
+        customerId: { type: string }
+        type:
+          type: string
+          enum: [checking, savings]
+        currency:
+          type: string
+
+    PaginatedAccounts:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Account"
+        total: { type: integer }
+
+
+    #######################
+    # TRANSACTIONS
+    #######################
+    Transaction:
+      type: object
+      properties:
+        id: { type: string }
+        accountId: { type: string }
+        type:
+          type: string
+          enum: [deposit, withdrawal, transfer_in, transfer_out, card_payment]
+        amount: { type: number }
+        currency: { type: string }
+        description: { type: string }
+        createdAt:
+          type: string
+          format: date-time
+
+    PaginatedTransactions:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Transaction"
+        total: { type: integer }
+
+
+    #######################
+    # TRANSFERS
+    #######################
+    Transfer:
+      type: object
+      properties:
+        id: { type: string }
+        fromAccountId: { type: string }
+        toAccountId: { type: string }
+        amount: { type: number }
+        status:
+          type: string
+          enum: [pending, completed, failed]
+        createdAt:
+          type: string
+          format: date-time
+
+    TransferCreate:
+      type: object
+      required: [fromAccountId, toAccountId, amount]
+      properties:
+        fromAccountId: { type: string }
+        toAccountId: { type: string }
+        amount: { type: number }
+
+
+    #######################
+    # CARDS
+    #######################
+    Card:
+      type: object
+      properties:
+        id: { type: string }
+        accountId: { type: string }
+        maskedPan: { type: string }
+        status:
+          type: string
+          enum: [active, frozen, blocked]
+        issuedAt:
+          type: string
+          format: date-time
+
+    CardCreate:
+      type: object
+      required: [accountId]
+      properties:
+        accountId: { type: string }
+
+    CardUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [active, frozen, blocked]
