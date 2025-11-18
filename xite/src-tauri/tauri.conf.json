@@ -2,21 +2,19 @@
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "xite",
   "version": "0.1.0",
-  "identifier": "com.xite.dev",
+  "identifier": "com.eraya.xite",
   "build": {
-    "frontendDist": "../dist",
-    "devUrl": "http://localhost:5173",
     "beforeDevCommand": "npm run dev",
-    "beforeBuildCommand": "npm run build"
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
   },
   "app": {
     "windows": [
       {
         "title": "xite",
         "width": 800,
-        "height": 600,
-        "resizable": true,
-        "fullscreen": false
+        "height": 600
       }
     ],
     "security": {
