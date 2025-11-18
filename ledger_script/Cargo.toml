@@ -1,0 +1,13 @@
+[package]
+name = "ledger_script"
+version = "0.1.0"
+edition = "2024"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "ledger_script"
+crate-type = ["cdylib"]
+
+[dependencies.pyo3]
+version = "0.27.0"
+features = ["auto-initialize"]
