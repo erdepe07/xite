@@ -1,1 +1,0 @@
-"use strict";$(function(){$("#widget-carousel").slick({rtl:$("html").attr("dir")==="rtl",asNavFor:"#widget-carousel-nav",slidesToShow:1,slidesToScroll:1,arrows:false});$("#widget-carousel-nav").slick({rtl:$("html").attr("dir")==="rtl",asNavFor:"#widget-carousel",slidesToShow:1,slidesToScroll:1,arrows:false,centerMode:true})});

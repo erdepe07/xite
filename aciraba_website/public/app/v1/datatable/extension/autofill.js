@@ -1,1 +1,0 @@
-"use strict";$(function(){$("#datatable-1").DataTable({responsive:true,autoFill:true});$("#datatable-2").DataTable({responsive:true,autoFill:{focus:"click"}});$("#datatable-3").DataTable({responsive:true,autoFill:{horizontal:false}})});

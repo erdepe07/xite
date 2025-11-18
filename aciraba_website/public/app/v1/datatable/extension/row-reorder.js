@@ -1,1 +1,0 @@
-"use strict";$(function(){$("#datatable-1").DataTable({responsive:true,rowReorder:true});$("#datatable-2").DataTable({responsive:true,rowReorder:true,columnDefs:[{orderable:true,targets:0},{orderable:false,targets:"_all"}]})});
