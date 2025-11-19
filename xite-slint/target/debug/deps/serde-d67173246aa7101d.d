@@ -1,0 +1,14 @@
+/home/erfanhuda/Documents/Kotakcantik/xite/xite-slint/target/debug/deps/serde-d67173246aa7101d.d: /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /home/erfanhuda/Documents/Kotakcantik/xite/xite-slint/target/debug/build/serde-5e55967fd4a49097/out/private.rs
+
+/home/erfanhuda/Documents/Kotakcantik/xite/xite-slint/target/debug/deps/libserde-d67173246aa7101d.rlib: /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /home/erfanhuda/Documents/Kotakcantik/xite/xite-slint/target/debug/build/serde-5e55967fd4a49097/out/private.rs
+
+/home/erfanhuda/Documents/Kotakcantik/xite/xite-slint/target/debug/deps/libserde-d67173246aa7101d.rmeta: /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /home/erfanhuda/Documents/Kotakcantik/xite/xite-slint/target/debug/build/serde-5e55967fd4a49097/out/private.rs
+
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs:
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs:
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs:
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs:
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs:
+/home/erfanhuda/Documents/Kotakcantik/xite/xite-slint/target/debug/build/serde-5e55967fd4a49097/out/private.rs:
+
+# env-dep:OUT_DIR=/home/erfanhuda/Documents/Kotakcantik/xite/xite-slint/target/debug/build/serde-5e55967fd4a49097/out

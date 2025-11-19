@@ -101,7 +101,7 @@ return children;
 }
 
 // --- Main App ---
-function Example() {
+export default function Example() {
 const [user, setUser] = useState(() => null);
 const navigate = useNavigate ? useNavigate() : null; // If mounted inside Router via index, useNavigate will exist
 
@@ -164,5 +164,3 @@ return (
     </div>
 );
 }
-
-export default Example;

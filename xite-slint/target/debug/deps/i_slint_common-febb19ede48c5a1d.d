@@ -1,0 +1,10 @@
+/home/erfanhuda/Documents/Kotakcantik/xite/xite-slint/target/debug/deps/i_slint_common-febb19ede48c5a1d.d: /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/i-slint-common-1.14.1/lib.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/i-slint-common-1.14.1/builtin_structs.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/i-slint-common-1.14.1/enums.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/i-slint-common-1.14.1/key_codes.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/i-slint-common-1.14.1/sharedfontique.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/i-slint-common-1.14.1/README.md
+
+/home/erfanhuda/Documents/Kotakcantik/xite/xite-slint/target/debug/deps/libi_slint_common-febb19ede48c5a1d.rmeta: /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/i-slint-common-1.14.1/lib.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/i-slint-common-1.14.1/builtin_structs.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/i-slint-common-1.14.1/enums.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/i-slint-common-1.14.1/key_codes.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/i-slint-common-1.14.1/sharedfontique.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/i-slint-common-1.14.1/README.md
+
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/i-slint-common-1.14.1/lib.rs:
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/i-slint-common-1.14.1/builtin_structs.rs:
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/i-slint-common-1.14.1/enums.rs:
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/i-slint-common-1.14.1/key_codes.rs:
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/i-slint-common-1.14.1/sharedfontique.rs:
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/i-slint-common-1.14.1/README.md:

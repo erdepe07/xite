@@ -1,0 +1,11 @@
+/home/erfanhuda/Documents/Kotakcantik/xite/xite-slint/target/debug/deps/quote-07f3a1b2e12be3fa.d: /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.42/src/lib.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.42/src/ext.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.42/src/format.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.42/src/ident_fragment.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.42/src/to_tokens.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.42/src/runtime.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.42/src/spanned.rs
+
+/home/erfanhuda/Documents/Kotakcantik/xite/xite-slint/target/debug/deps/libquote-07f3a1b2e12be3fa.rmeta: /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.42/src/lib.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.42/src/ext.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.42/src/format.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.42/src/ident_fragment.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.42/src/to_tokens.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.42/src/runtime.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.42/src/spanned.rs
+
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.42/src/lib.rs:
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.42/src/ext.rs:
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.42/src/format.rs:
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.42/src/ident_fragment.rs:
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.42/src/to_tokens.rs:
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.42/src/runtime.rs:
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.42/src/spanned.rs:

@@ -1,0 +1,16 @@
+export component MainWindow {
+    width: 400px;
+    height: 300px;
+
+    Text {
+        text: "Hello, World!";
+        color: blue;
+        x: 20px;
+        y: 20px;
+    }
+
+    Button {
+        text: "Click me";
+        clicked => { root.counter += 1; }
+    }
+}

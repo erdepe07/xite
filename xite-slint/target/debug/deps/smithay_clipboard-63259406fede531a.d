@@ -1,0 +1,10 @@
+/home/erfanhuda/Documents/Kotakcantik/xite/xite-slint/target/debug/deps/smithay_clipboard-63259406fede531a.d: /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/smithay-clipboard-0.7.3/src/lib.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/smithay-clipboard-0.7.3/src/mime.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/smithay-clipboard-0.7.3/src/state.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/smithay-clipboard-0.7.3/src/worker.rs
+
+/home/erfanhuda/Documents/Kotakcantik/xite/xite-slint/target/debug/deps/libsmithay_clipboard-63259406fede531a.rlib: /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/smithay-clipboard-0.7.3/src/lib.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/smithay-clipboard-0.7.3/src/mime.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/smithay-clipboard-0.7.3/src/state.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/smithay-clipboard-0.7.3/src/worker.rs
+
+/home/erfanhuda/Documents/Kotakcantik/xite/xite-slint/target/debug/deps/libsmithay_clipboard-63259406fede531a.rmeta: /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/smithay-clipboard-0.7.3/src/lib.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/smithay-clipboard-0.7.3/src/mime.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/smithay-clipboard-0.7.3/src/state.rs /home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/smithay-clipboard-0.7.3/src/worker.rs
+
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/smithay-clipboard-0.7.3/src/lib.rs:
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/smithay-clipboard-0.7.3/src/mime.rs:
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/smithay-clipboard-0.7.3/src/state.rs:
+/home/erfanhuda/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/smithay-clipboard-0.7.3/src/worker.rs:
