@@ -83,30 +83,54 @@ class Auth extends BaseController{
 			"form_params" => $datapost
 		]);
 		$datajson = json_decode($posts_data->getBody());
-		if ($datajson->aciaraba_json[0]->success == true){
-			$arraysession = [
-				'kodeunikmember'=> $datajson->aciaraba_json[0]->data[0]->KODEUNIKMEMBER,
-				'pengguna_id'	=> $datajson->aciaraba_json[0]->data[0]->PENGGUNA_ID,
-				'namapengguna'	=> $datajson->aciaraba_json[0]->data[0]->NAMAPENGGUNA,
-				'totaldeposit'	=> $datajson->aciaraba_json[0]->data[0]->TOTALDEPOSIT,
-				'namaasli'		=> $datajson->aciaraba_json[0]->data[0]->NAMA,
-				'notelp'		=> $datajson->aciaraba_json[0]->data[0]->NOTELP,
-				'hakakses'		=> $datajson->aciaraba_json[0]->data[0]->HAKAKSESID,
-				'fotourl'		=> $datajson->aciaraba_json[0]->data[0]->URLFOTO,
-				'jsonmenu'		=> $datajson->aciaraba_json[0]->data[0]->JSONMENU,
-				'punyaoutlet' 	=> $datajson->aciaraba_json[0]->data[0]->PUNYAOUTLET,
-				'namaoutlet'	=> $datajson->aciaraba_json[0]->data[0]->NAMAOUTLET,
-				'pajaknegara' 	=> $datajson->aciaraba_json[0]->data[0]->PAJAKNEGARA,
-				'pajaktoko' 	=> $datajson->aciaraba_json[0]->data[0]->PAJAKTOKO,
-				'outlet' 		=> $datajson->aciaraba_json[0]->data[0]->TUJUANOUTLET != 0 ? $datajson->aciaraba_json[0]->data[0]->TUJUANOUTLET : $datajson->aciaraba_json[0]->data[0]->KODEOUTLET,
-				'email' 		=> $datajson->aciaraba_json[0]->data[0]->EMAIL,
-				'verif_wa' 		=> $datajson->aciaraba_json[0]->data[0]->VERIF_WA,
-				'TOKENUSER' 	=> $datajson->aciaraba_json[0]->data[0]->TOKENKEY,
-				'OUTLETTUJUAN'  => $datajson->aciaraba_json[0]->data[0]->TUJUANOUTLET,
-				'kodekomputer'	=> service('request')->getPost('kodekomputer'),
-			];
-			$this->session->set($arraysession);
-		}
+		$arraysession = [
+			'kodeunikmember'	=> '100001',
+			'pengguna_id'	=> '1',
+			'namapengguna'	=> 'erfanhuda',
+			'totaldeposit'	=> '10000',
+			'namaasli'	=> 'erfan',
+			'notelp'	=> '085799663331',
+			'hakakses'	=> '1',
+			'fotourl'	=> '',
+			'jsonmenu'	=> '',
+			'punyaoutlet'	=> '',
+			'namaoutlet'	=> '',
+			'pajaknegara'	=> '',
+			'pajaktoko'	=> '',
+			'outlet'	=> 'GDPST',
+			'email'	=> '',
+			'verif_wa'	=> '',
+			'TOKENUSER'	=> 'c127301c7097h0197230h1927',
+			'OUTLETTUJUAN'	=> '',
+			'kodekomputer'	=> service('request')->getPost('kodekomputer'),
+		];
+		$this->session->set($arraysession);
+
+		// if ($datajson->aciaraba_json[0]->success == true){
+		// 	$arraysession = [
+		// 		'kodeunikmember'=> $datajson->aciaraba_json[0]->data[0]->KODEUNIKMEMBER,
+		// 		'pengguna_id'	=> $datajson->aciaraba_json[0]->data[0]->PENGGUNA_ID,
+		// 		'namapengguna'	=> $datajson->aciaraba_json[0]->data[0]->NAMAPENGGUNA,
+		// 		'totaldeposit'	=> $datajson->aciaraba_json[0]->data[0]->TOTALDEPOSIT,
+		// 		'namaasli'		=> $datajson->aciaraba_json[0]->data[0]->NAMA,
+		// 		'notelp'		=> $datajson->aciaraba_json[0]->data[0]->NOTELP,
+		// 		'hakakses'		=> $datajson->aciaraba_json[0]->data[0]->HAKAKSESID,
+		// 		'fotourl'		=> $datajson->aciaraba_json[0]->data[0]->URLFOTO,
+		// 		'jsonmenu'		=> $datajson->aciaraba_json[0]->data[0]->JSONMENU,
+		// 		'punyaoutlet' 	=> $datajson->aciaraba_json[0]->data[0]->PUNYAOUTLET,
+		// 		'namaoutlet'	=> $datajson->aciaraba_json[0]->data[0]->NAMAOUTLET,
+		// 		'pajaknegara' 	=> $datajson->aciaraba_json[0]->data[0]->PAJAKNEGARA,
+		// 		'pajaktoko' 	=> $datajson->aciaraba_json[0]->data[0]->PAJAKTOKO,
+		// 		'outlet' 		=> $datajson->aciaraba_json[0]->data[0]->TUJUANOUTLET != 0 ? $datajson->aciaraba_json[0]->data[0]->TUJUANOUTLET : $datajson->aciaraba_json[0]->data[0]->KODEOUTLET,
+		// 		'email' 		=> $datajson->aciaraba_json[0]->data[0]->EMAIL,
+		// 		'verif_wa' 		=> $datajson->aciaraba_json[0]->data[0]->VERIF_WA,
+		// 		'TOKENUSER' 	=> $datajson->aciaraba_json[0]->data[0]->TOKENKEY,
+		// 		'OUTLETTUJUAN'  => $datajson->aciaraba_json[0]->data[0]->TUJUANOUTLET,
+		// 		'kodekomputer'	=> service('request')->getPost('kodekomputer'),
+		// 	];
+		// 	$this->session->set($arraysession);
+		// }
+
 		return json_encode($datajson->aciaraba_json[0]);
 	}
 	public function logout(){

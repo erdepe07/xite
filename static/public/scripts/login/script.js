@@ -12,24 +12,26 @@ function proseslogin() {
     if (login_username == "" || login_password == "") return toastr["info"]("Maaf, NAMA PENGGUNA dan KATASANDI tidak boleh kosong dong ? coba deh isi dengan benar");
     $('#login_prosesmasuk').prop("disabled", true);
     $('#login_prosesmasuk').html('<i class="fa fa-spin fa-spinner"></i> Proses Masuk');
-    $.ajax({
-        url: baseurljavascript + 'auth/proseslogin',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            login_username: login_username,
-            login_password: login_password,
-            kodekomputer: $("#kodekasa").val(),
-        },
-        complete: function () {
-            $('#login_prosesmasuk').prop("disabled", false);
-            $('#login_prosesmasuk').html('Masuk');
-        },
-        success: function (response) {
-            if (response.success == false) return toastr["error"](response.msg)
-            window.location = baseurljavascript;
-        }
-    });
+    // $.ajax({
+    //     url: baseurljavascript + 'auth/proseslogin',
+    //     type: 'POST',
+    //     dataType: 'json',
+    //     data: {
+    //         login_username: login_username,
+    //         login_password: login_password,
+    //         kodekomputer: $("#kodekasa").val(),
+    //     },
+    //     complete: function () {
+    //         $('#login_prosesmasuk').prop("disabled", false);
+    //         $('#login_prosesmasuk').html('Masuk');
+    //     },
+    //     success: function (response) {
+    //         if (response.success == false) return toastr["error"](response.msg)
+    //         window.location = baseurljavascript;
+    //     }
+    // });
+    
+    window.location = baseurljavascript;
 }
 function getInternationalPhoneNumber() {
     const dialCode = iti.getSelectedCountryData().dialCode;
