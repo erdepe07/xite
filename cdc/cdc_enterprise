@@ -1,0 +1,22 @@
+ ┌─────────────────────────────────────────────┐
+ │          DATA GOVERNANCE & METADATA         │
+ │  • Collibra, Alation, DataHub               │
+ │  • Lineage: Source → CDC → Raw → Silver → DW│
+ │  • Business glossary, ownership             │
+ └─────────────────────────────────────────────┘
+
+ ┌─────────────────────────────────────────────┐
+ │     MONITORING / QA / OBSERVABILITY         │
+ │  • CDC lag monitoring                       │
+ │  • Broken offsets detection                 │
+ │  • Schema drift detection                   │
+ │  • Record count reconciliation              │
+ │  • Alerts (Prometheus, Datadog, Splunk)     │
+ └─────────────────────────────────────────────┘
+
+ ┌─────────────────────────────────────────────┐
+ │               SECURITY & COMPLIANCE         │
+ │  • RBAC / ABAC / IAM                        │
+ │  • Encryption at rest + in transit          │
+ │  • PII masking / tokenization               │
+ └─────────────────────────────────────────────┘
