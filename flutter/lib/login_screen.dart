@@ -11,11 +11,14 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   // ... (Controllers, _isLoading, _message tetap sama) ...
-  final TextEditingController _usernameController = TextEditingController(text: 'erayadigital'); 
-  final TextEditingController _passwordController = TextEditingController(text: 'yourpassword'); 
+  final TextEditingController _usernameController = TextEditingController(
+    text: 'erayadigital',
+  );
+  final TextEditingController _passwordController = TextEditingController(
+    text: 'yourpassword',
+  );
   bool _isLoading = false;
   String _message = '';
-
 
   // --- METHOD LOGIN TETAP SAMA ---
   Future<void> _handleLogin() async {
@@ -34,15 +37,14 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     if (result['success'] == true) {
-      final userName = result['user']['nama'] as String; 
+      final userName = result['user']['nama'] as String;
 
       // Navigasi ke Dashboard
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => DashboardScreen(userName: userName), 
+          builder: (context) => DashboardScreen(userName: userName),
         ),
       );
-      
     } else {
       setState(() {
         _message = result['message'];
@@ -58,10 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Row(
         children: <Widget>[
           // 1. KOLOM KIRI (Visual & Branding) - Lebar 40%
-          const Expanded(
-            flex: 4, 
-            child: LeftBrandingColumn(),
-          ),
+          const Expanded(flex: 4, child: LeftBrandingColumn()),
 
           // 2. KOLOM KANAN (Form Input Login) - Lebar 60%
           Expanded(
@@ -107,11 +106,7 @@ class LeftBrandingColumn extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // Icon sebagai pengganti Logo POS
-            Icon(
-              Icons.point_of_sale,
-              color: Colors.white,
-              size: 100,
-            ),
+            Icon(Icons.point_of_sale, color: Colors.white, size: 100),
             SizedBox(height: 20),
             Text(
               'Eraya Minimalist POS System',
@@ -124,10 +119,7 @@ class LeftBrandingColumn extends StatelessWidget {
             SizedBox(height: 10),
             Text(
               'Silakan masukkan kredensial Anda.',
-              style: TextStyle(
-                color: Colors.white70,
-                fontSize: 16,
-              ),
+              style: TextStyle(color: Colors.white70, fontSize: 16),
             ),
           ],
         ),
@@ -169,7 +161,7 @@ class RightLoginColumn extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 40),
-            
+
             // --- Username Field ---
             TextField(
               controller: usernameController,
@@ -180,7 +172,7 @@ class RightLoginColumn extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20.0),
-            
+
             // --- Password Field ---
             TextField(
               controller: passwordController,
@@ -192,7 +184,7 @@ class RightLoginColumn extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30.0),
-            
+
             // --- Login Button ---
             ElevatedButton(
               onPressed: isLoading ? null : onLoginPressed,
@@ -200,14 +192,29 @@ class RightLoginColumn extends StatelessWidget {
                 backgroundColor: Colors.blue.shade800,
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(vertical: 18),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
               child: isLoading
-                  ? const SizedBox(height: 24, width: 24, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
-                  : const Text('MASUK', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  ? const SizedBox(
+                      height: 24,
+                      width: 24,
+                      child: CircularProgressIndicator(
+                        color: Colors.white,
+                        strokeWidth: 2,
+                      ),
+                    )
+                  : const Text(
+                      'MASUK',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
             ),
             const SizedBox(height: 20.0),
-            
+
             // --- Message Display ---
             Text(
               message,

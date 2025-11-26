@@ -40,9 +40,7 @@ class DashboardScreen extends StatelessWidget {
               onPressed: () {
                 // Navigasi kembali ke halaman login (untuk logout)
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => const LoginScreen(),
-                  ),
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
                 );
               },
               child: const Text('Logout'),
