@@ -1,0 +1,64 @@
+                   ┌────────────────────────────────────────────┐
+                   │               SOURCE SYSTEMS                │
+                   │  (OLTP DBs: Oracle, SQL Server, MySQL, …)   │
+                   └───────────────────────────────┬────────────┘
+                                                   │
+                                                   │ Log-based CDC
+                                                   ▼
+                ┌──────────────────────────────────────────────────────┐
+                │                  CDC CAPTURE LAYER                   │
+                │  • GoldenGate / Debezium / AWS DMS / HVR             │
+                │  • Reads DB redo/transaction logs                    │
+                │  • Generates INSERT/UPDATE/DELETE events             │
+                │  • Maintains offsets & checkpoints                   │
+                └───────────────────────────────┬─────────────────────┘
+                                                │
+                                                │ Streaming of CDC events
+                                                ▼
+         ┌──────────────────────────────────────────────────────────────────┐
+         │                   CDC TRANSPORT / MESSAGE BUS                    │
+         │        • Kafka / Confluent / Kinesis / EventHub                 │
+         │        • Provides buffering, replay, durability                  │
+         │        • Schema Registry for schema evolution                    │
+         └───────────────────────────────┬─────────────────────────────────┘
+                                         │
+                                         │ Raw CDC events
+                                         ▼
+      ┌────────────────────────────────────────────────────────────────────────┐
+      │                            RAW / BRONZE ZONE                           │
+      │    (Immutable append-only storage: S3, ADLS, GCS, HDFS, Delta Lake)    │
+      │  • Stores raw CDC events (I/U/D)                                       │
+      │  • Includes before/after images                                        │
+      │  • Retains metadata (LSN, SCN, commit_ts, op_type)                     │
+      └───────────────────────────────┬───────────────────────────────────────┘
+                                      │
+                                      │ Micro-batch or streaming consumption
+                                      ▼
+     ┌──────────────────────────────────────────────────────────────────────────┐
+     │                             APPLY / SILVER ZONE                          │
+     │  • CDC event processing engine (Spark, Flink, Snowflake Tasks, etc.)    │
+     │  • MERGE INTO operations reconstruct tables                             │
+     │  • Idempotent upserts                                                   │
+     │  • Apply deletes, maintain soft-delete flags                            │
+     │  • Build “operational mirrors” of source tables                          │
+     └───────────────────────────────┬─────────────────────────────────────────┘
+                                     │
+                                     │ Curated table structures
+                                     ▼
+     ┌──────────────────────────────────────────────────────────────────────────┐
+     │                        CURATED / GOLD / WAREHOUSE ZONE                  │
+     │     • Snowflake / BigQuery / Databricks / Synapse / Redshift            │
+     │     • SCD Type 1 / Type 2 logic                                         │
+     │     • Business-validated models (Dimensions & Facts)                    │
+     │     • Data marts, semantic models                                       │
+     └───────────────────────────────┬─────────────────────────────────────────┘
+                                     │
+                                     │ Consumption Layer
+                                     ▼
+   ┌────────────────────────────────────────────────────────────────────────────┐
+   │                             ANALYTICS & APPS                               │
+   │     • BI Tools (Power BI, Tableau, Looker)                                 │
+   │     • ML Feature Stores (Databricks, Tecton)                               │
+   │     • Data APIs / Reverse ETL                                              │
+   └────────────────────────────────────────────────────────────────────────────┘
+
