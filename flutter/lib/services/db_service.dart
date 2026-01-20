@@ -1,44 +1,53 @@
 import 'package:dio/dio.dart';
 
-const String API_BASE_URL = 'http://localhost:3000/api';
-
 class AuthService {
-  // Ubah nama class menjadi AuthService
-  final Dio _dio = Dio();
+  // 1. Inisialisasi Dio dengan BaseOptions
+  final Dio _dio = Dio(
+    BaseOptions(
+      baseUrl: 'http://localhost:3000/api', // Gunakan 10.0.2.2 untuk Emulator Android
+      connectTimeout: const Duration(seconds: 5), // Maksimal 5 detik untuk konek
+      receiveTimeout: const Duration(seconds: 3), // Maksimal 3 detik untuk terima data
+    ),
+  );
 
   Future<Map<String, dynamic>> login(String username, String password) async {
     try {
       final response = await _dio.post(
-        '$API_BASE_URL/login',
-        data: {'username': username, 'password': password},
+        '/login', // Cukup tulis endpoint-nya saja
+        data: {
+          'username': username,
+          'password': password,
+        },
       );
 
-      // Jika server merespon 200 (OK)
-      if (response.statusCode == 200 && response.data['status'] == 'success') {
+      // Dio secara otomatis mengonversi response body ke Map/List
+      final data = response.data;
+
+      if (response.statusCode == 200 && data['status'] == 'success') {
         return {
           'success': true,
-          'user':
-              response.data['user'], // Data pengguna yang kembali dari server
+          'user': data['user'], // Berisi 'nama' dan 'hakAksesId'
         };
       } else {
-        // Jika server merespon 401 atau 500
         return {
           'success': false,
-          'message': response.data['message'] ?? 'Login Gagal.',
+          'message': data['message'] ?? 'Login Gagal.',
         };
       }
     } on DioException catch (e) {
-      // Tangani error jaringan atau server
-      String msg = 'Gagal terhubung ke API. Pastikan node server.js berjalan.';
-      if (e.response != null && e.response!.data != null) {
-        msg = e.response!.data['message'] ?? msg;
+      // Tangani error berdasarkan tipe DioException
+      String msg = 'Gagal terhubung ke server.';
+      
+      if (e.type == DioExceptionType.connectionTimeout) {
+        msg = 'Koneksi lambat, silakan coba lagi.';
+      } else if (e.response != null) {
+        // Jika server merespon dengan error (401, 500, dsb)
+        msg = e.response?.data['message'] ?? 'Kesalahan Server.';
       }
+
       return {'success': false, 'message': msg};
     } catch (e) {
-      return {
-        'success': false,
-        'message': 'Terjadi kesalahan tidak terduga: $e',
-      };
+      return {'success': false, 'message': 'Terjadi kesalahan: $e'};
     }
   }
 }

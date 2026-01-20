@@ -37,12 +37,28 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     if (result['success'] == true) {
-      final userName = result['user']['nama'] as String;
+      // PERBAIKAN DI SINI:
+      // 1. Gunakan key 'hakAksesId' sesuai response dari server.js Anda
+      // 2. Gunakan ?.toString() ?? "" untuk menghindari error 'Null is not subtype of String'
+      //final userName = result['user']['nama']?.toString() ?? "User";
+      //final role = result['user']['hakAksesId']?.toString() ?? "GUEST";
+      print("HAK AKSES DARI DB: ${result['user']['hakAksesId']}");
+      print("MENU YANG DITERIMA: ${result['user']['allowedMenus']}");
+      final List<String> menus = List<String>.from(result['user']['allowedMenus'] ?? []);
+
+      if (!mounted) return;
+
+      print("DEBUG DATA USER: ${result['user']}"); // Tambahkan ini untuk cek terminal
+      print("DEBUG MENUS: $menus");
 
       // Navigasi ke Dashboard
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => DashboardScreen(userName: userName),
+          builder: (context) => DashboardScreen(
+            userName: result['user']['nama'] ?? "User",
+            role: result['user']['hakAksesId'] ?? "GUEST",
+            allowedMenus: menus, // Kirim list menu dinamis
+          ),
         ),
       );
     } else {
@@ -129,7 +145,8 @@ class LeftBrandingColumn extends StatelessWidget {
 }
 
 // --- WIDGET BARU: KOLOM KANAN (LOGIN FORM) ---
-class RightLoginColumn extends StatelessWidget {
+// --- WIDGET DIPERBARUI: KOLOM KANAN (LOGIN FORM) ---
+class RightLoginColumn extends StatefulWidget {
   final TextEditingController usernameController;
   final TextEditingController passwordController;
   final bool isLoading;
@@ -146,11 +163,19 @@ class RightLoginColumn extends StatelessWidget {
   });
 
   @override
+  State<RightLoginColumn> createState() => _RightLoginColumnState();
+}
+
+class _RightLoginColumnState extends State<RightLoginColumn> {
+  // Variabel lokal untuk mengatur sembunyi/tampil password
+  bool _isPasswordObscured = true;
+
+  @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
         padding: const EdgeInsets.all(40.0),
-        constraints: const BoxConstraints(maxWidth: 450), // Batasi lebar form
+        constraints: const BoxConstraints(maxWidth: 450),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -164,7 +189,7 @@ class RightLoginColumn extends StatelessWidget {
 
             // --- Username Field ---
             TextField(
-              controller: usernameController,
+              controller: widget.usernameController,
               decoration: const InputDecoration(
                 labelText: 'Nama Pengguna',
                 border: OutlineInputBorder(),
@@ -173,21 +198,35 @@ class RightLoginColumn extends StatelessWidget {
             ),
             const SizedBox(height: 20.0),
 
-            // --- Password Field ---
+            // --- Password Field (DENGAN HIDE/SHOW) ---
             TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
+              controller: widget.passwordController,
+              obscureText: _isPasswordObscured, // Menggunakan variabel state
+              decoration: InputDecoration(
                 labelText: 'Password',
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.lock),
+                border: const OutlineInputBorder(),
+                prefixIcon: const Icon(Icons.lock),
+                // Menambahkan Icon di sebelah kanan
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _isPasswordObscured 
+                        ? Icons.visibility_off 
+                        : Icons.visibility,
+                  ),
+                  onPressed: () {
+                    // Toggle status obscureText
+                    setState(() {
+                      _isPasswordObscured = !_isPasswordObscured;
+                    });
+                  },
+                ),
               ),
             ),
             const SizedBox(height: 30.0),
 
             // --- Login Button ---
             ElevatedButton(
-              onPressed: isLoading ? null : onLoginPressed,
+              onPressed: widget.isLoading ? null : widget.onLoginPressed,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue.shade800,
                 foregroundColor: Colors.white,
@@ -196,7 +235,7 @@ class RightLoginColumn extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              child: isLoading
+              child: widget.isLoading
                   ? const SizedBox(
                       height: 24,
                       width: 24,
@@ -217,10 +256,10 @@ class RightLoginColumn extends StatelessWidget {
 
             // --- Message Display ---
             Text(
-              message,
+              widget.message,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: message.contains('Berhasil') ? Colors.green : Colors.red,
+                color: widget.message.contains('Berhasil') ? Colors.green : Colors.red,
                 fontWeight: FontWeight.bold,
               ),
             ),
